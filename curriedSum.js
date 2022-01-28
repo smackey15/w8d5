@@ -42,14 +42,28 @@ console.log(f1 = f1(6)); // = 30
 // sumThree.curry(3)(4)(20)(6); // == 30
 
 
-Function.prototype.curry = function(numArgs) {
+// Function.prototype.curry = function(numArgs) {
+//   let args = [];
+//   let that = this;
+
+//   return function _curry() {
+//     args = args.concat(Object.values(arguments));
+//     if (args.length >= numArgs) {
+//       return that.apply(that, args)
+//     } else {
+//       return _curry
+//     }
+//   }
+// }
+
+Function.prototype.curry = function (numArgs) {
   let args = [];
   let that = this;
 
-  return function _curry() {
-    args = args.concat(Object.values(arguments));
+  return function _curry(...args2) {
+    args = args.concat(args2);
     if (args.length >= numArgs) {
-      return that.apply(that, args)
+      return that(...args);
     } else {
       return _curry
     }
